@@ -11,7 +11,7 @@ class Program
         for (int i = 0; i < 9; i++)
         {
             int digit = int.Parse(isbnPart[i].ToString());
-            sum += (10 - i) * digit; 
+            sum += (10 - i) * digit;
         }
 
         int d10 = (11 - (sum % 11)) % 11;
