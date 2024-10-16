@@ -18,15 +18,22 @@ namespace Task_2._2.Classes
             {
                 if (i < 0 || j < 0 || i >= Size || j >= Size)
                 {
-                    return 0;
+                    throw new IndexOutOfRangeException($"Indices out of range: i={i}, j={j}. Valid range is 0 to {Size - 1}.");
                 }
                     return i == j ? diagonalElements[i] : 0;
             }
 
             set
             {
-                if (i < 0 || j < 0 || i >= Size || j >= Size || i != j)
+                if (i < 0 || j < 0 || i >= Size || j >= Size)
+                {
+                    throw new IndexOutOfRangeException($"Indices out of range: i={i}, j={j}. Valid range is 0 to {Size - 1}.");
+                }
+
+                if (i != j) 
+                {
                     return;
+                }
                 diagonalElements[i] = value;
             }
         }
