@@ -9,16 +9,31 @@ public class Program
         Console.WriteLine("Enter number b:");
         int b = int.Parse(Console.ReadLine());
 
-        for (int i = a; i <= b; i++)
+        if(a <= b)
         {
-            string duodecimal = ConvertToDuodecimal(i);
-
-            int countA = CountCharacter(duodecimal, 'A');
-
-            if (countA == 2)
+            for (int i = a; i <= b; i++)
             {
-                Console.WriteLine(i);
+            ProcessNumber(i);
             }
+        }
+        else
+        {
+            for(int i = a; i >= b; i--)
+            {
+                ProcessNumber(i);
+            }
+        }
+    }
+
+
+    static void ProcessNumber(int number) 
+    { 
+        string duodecimal = ConvertToDuodecimal(number);
+        int countA = CountCharacter(duodecimal, 'A');
+
+        if(countA == 2)
+        {
+            Console.WriteLine(number);
         }
     }
 
@@ -39,6 +54,8 @@ public class Program
     {
         if (number == 0) return "0";
 
+        bool isNegative = number < 0;
+        number = Math.Abs(number);
         string result = "";
 
         while (number > 0)
@@ -48,7 +65,7 @@ public class Program
             number /= 12;
         }
 
-        return result == "" ? "0" : result;
+        return isNegative ? "-" + result : result;
     }
 
 
