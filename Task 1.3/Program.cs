@@ -17,17 +17,17 @@ class Program
 
         Console.WriteLine("Original array: [" + string.Join(", ", originalArray) + "]");
 
-        int[] uniqueArray = GetUniqueArray(originalArray, n);
+        int[] uniqueArray = GetUniqueArray(originalArray);
 
         Console.WriteLine("New array with unique values: [" + string.Join(", ", uniqueArray) + "]");
     }
 
-    static int[] GetUniqueArray(int[] originalArray, int originalLength)
+    static int[] GetUniqueArray(int[] originalArray)
     {
-        int[] tempArray = new int[originalLength];
+        int[] tempArray = new int[originalArray.Length];
         int uniqueCount = 0;
 
-        for (int i = 0; i < originalLength; i++)
+        for (int i = 0; i < originalArray.Length; i++)
         {
             bool isDuplicate = false;
             for (int j = 0; j < uniqueCount; j++)
@@ -47,10 +47,7 @@ class Program
         }
 
         int[] uniqueArray = new int[uniqueCount];
-        for (int i = 0; i < uniqueCount; i++)
-        {
-            uniqueArray[i] = tempArray[i];
-        }
+        Array.Copy(tempArray, uniqueArray, uniqueCount);
 
         return uniqueArray;
     }
