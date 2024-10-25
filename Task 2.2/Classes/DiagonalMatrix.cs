@@ -9,32 +9,34 @@ namespace Task_2._2.Classes
 
         public DiagonalMatrix(params int[] elements)
         {
-            diagonalElements = elements ?? Array.Empty<int>();
+            diagonalElements = new int[elements.Length];
+            Array.Copy(elements, diagonalElements, elements.Length);
         }
 
         public int this[int i, int j]
         {
             get
             {
-                if (i < 0 || j < 0 || i >= Size || j >= Size)
-                {
-                    throw new IndexOutOfRangeException($"Indices out of range: i={i}, j={j}. Valid range is 0 to {Size - 1}.");
-                }
-                    return i == j ? diagonalElements[i] : 0;
+                ValidateIndexes(i, j);
+                return i == j ? diagonalElements[i] : 0;
             }
 
             set
             {
-                if (i < 0 || j < 0 || i >= Size || j >= Size)
-                {
-                    throw new IndexOutOfRangeException($"Indices out of range: i={i}, j={j}. Valid range is 0 to {Size - 1}.");
-                }
+                ValidateIndexes(i, j);
 
-                if (i != j) 
-                {
-                    return;
+                if (i == j) 
+                { 
+                    diagonalElements[i] = value;
                 }
-                diagonalElements[i] = value;
+            }
+        }
+
+        private void ValidateIndexes(int i, int j)
+        { 
+            if (i < 0 || j < 0 || i >= Size || j >= Size)
+            {
+                throw new IndexOutOfRangeException($"Indices out of range: i={i}, j={j}. Valid range is 0 to {Size - 1}.");
             }
         }
 
@@ -78,21 +80,6 @@ namespace Task_2._2.Classes
                 result.AppendLine();
             }
             return result.ToString();
-        }
-
-        public DiagonalMatrix AddTwoMatrices(DiagonalMatrix other)
-        {
-            int size = Math.Max(this.Size, other.Size);
-            int[] resultElements = new int[size];
-
-            for (int i = 0; i < size; i++)
-            {
-                int element1 = (i < this.Size) ? this[i, i] : 0;
-                int element2 = (i < other.Size) ? other[i, i] : 0;
-                resultElements[i] = element1 + element2;
-            }
-
-            return new DiagonalMatrix(resultElements);
         }
     }
 }

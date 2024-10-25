@@ -22,7 +22,7 @@
 
             Console.WriteLine($"Are Matrix1 and Matrix2 equal? {matrix1.Equals(matrix2)}");
 
-            var matrix3 = matrix1.AddTwoMatrices(matrix2);
+            var matrix3 = matrix1.Add(matrix2);
             Console.WriteLine("Matrix3 (Matrix1 + Matrix2):");
             Console.WriteLine(matrix3.ToString());
         }
