@@ -1,14 +1,17 @@
 ﻿namespace Task_2._3.Entities
 {
-    public class Lecture
+    public class Lecture : Lesson
     {
-        public string Description { get; set; }
         public string Topic { get; set; }
 
-        public Lecture(string description, string topic) 
-        { 
-            Description = description ?? string.Empty; 
-            Topic = topic ?? string.Empty; 
+        public Lecture(string description, string topic ) : base(description)
+        {
+            Topic = topic ?? string.Empty;
+        }
+
+        public override Lesson Clone()
+        {
+            return new Lecture(this.Description, this.Topic);
         }
     }
 }

@@ -1,20 +1,20 @@
 ﻿namespace Task_2._3.Entities
 {
-    public class Training
+    public class Training : TrainingContent
     {
-        private List<object> _sessions;
+        private List<Lesson> _sessions;
 
-        public Training()
+        public Training(string? description) : base(description) 
         {
-            _sessions = new List<object>();
+            _sessions = new List<Lesson>();
         }
 
-        public List<object> GetSessions()
+        public List<Lesson> GetSessions()
         {
-            return _sessions;
+            return new List<Lesson>(_sessions);
         }
 
-        public void AddSession(object session)
+        public void AddSession(Lesson session)
         {
             if (session is Lecture || session is PracticalLesson)
             { 
@@ -40,17 +40,10 @@
 
         public Training Clone()
         {
-            var clone = new Training();
+            var clone = new Training(this.Description);
             foreach (var session in _sessions)
             {
-                if ( session is Lecture lecture)
-                {
-                    clone.AddSession(new Lecture(lecture.Description, lecture.Topic));
-                }
-                else if (session is PracticalLesson practicalLesson)
-                {
-                    clone.AddSession(new PracticalLesson (practicalLesson.Description, practicalLesson.TaskConditionLink, practicalLesson.SolutionLink));
-                }
+                clone.AddSession(session.Clone());
             }
             return clone;
         }
