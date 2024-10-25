@@ -43,6 +43,11 @@
 
         public double DistanceToAnotherPoint(Point3D anotherPoint)
         {
+
+            if (anotherPoint == null) 
+            { 
+            throw new ArgumentNullException(nameof(anotherPoint), "The Point cannot be null.");
+            }
             // PQ = d = √ [(x2 – x1)2 + (y2 – y1)2 + (z2 – z1)2].  mathematical formula
             int distanceX = X - anotherPoint.X;
             int distanceY = Y - anotherPoint.Y;
