@@ -12,11 +12,6 @@ class Program
         intQueue.Enqueue(3);
         intQueue.Enqueue(5);
         intQueue.Enqueue(7);
-
-        var stringQueue = new Queue<string>();
-        stringQueue.Enqueue("apple");
-        stringQueue.Enqueue("banana");
-        stringQueue.Enqueue("cherry");
         
         Console.WriteLine("Orginal int queue:");
         DisplayQueue(intQueue);
@@ -25,15 +20,9 @@ class Program
         Console.WriteLine("\nTail of the orginal queue:");
         DisplayQueue(tailIntQueue);
 
-        Console.WriteLine("Orginal string queue:");
-        DisplayQueue(stringQueue);
-
-        var tailStringQueue = stringQueue.Tail();
-        Console.WriteLine("\nTail of the orginal queue:");
-        DisplayQueue(tailStringQueue);
     }
 
-    static void DisplayQueue<T>(IQueue<T> queue)
+    static void DisplayQueue<T>(IQueue<T> queue) where T : struct
     {
         var tempQueue = new Queue<T>();
 
@@ -51,5 +40,4 @@ class Program
             queue.Enqueue(tempQueue.Dequeue());
         }
     }
-
 }
