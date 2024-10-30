@@ -1,6 +1,6 @@
 ﻿namespace Task_3._1.Queue
 {
-    public class Queue<T> : IQueue<T>
+    public class Queue<T> : IQueue<T> where T : struct
     {
         private class Node
         {
