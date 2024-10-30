@@ -4,7 +4,7 @@ public class Program
 {
     public static void Main()
     {
-        Training training = new Training();
+        Training training = new Training("Basic C# Training");
 
         training.AddSession(new Lecture("Intro to C#", "C# Basics"));
         training.AddSession(new PracticalLesson("Hands-on C#", "link_to_task", "link_to_solution"));

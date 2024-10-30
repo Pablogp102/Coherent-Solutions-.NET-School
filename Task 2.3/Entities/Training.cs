@@ -1,29 +1,32 @@
-﻿namespace Task_2._3.Entities
+﻿using System.ComponentModel;
+
+namespace Task_2._3.Entities
 {
     public class Training : TrainingContent
     {
-        private List<Lesson> _sessions;
+        private Lesson[] _sessions;
+        private int _sessionCount;
 
         public Training(string? description) : base(description) 
         {
-            _sessions = new List<Lesson>();
+            _sessions = new Lesson[4];
+            _sessionCount = 0;
         }
 
-        public List<Lesson> GetSessions()
+        public Lesson[] GetSessions()
         {
-            return new List<Lesson>(_sessions);
+            var sessionsCopy = new Lesson[_sessionCount];
+            Array.Copy(_sessions, sessionsCopy, _sessionCount);
+            return sessionsCopy;
         }
 
         public void AddSession(Lesson session)
         {
-            if (session is Lecture || session is PracticalLesson)
-            { 
-                _sessions.Add(session);
-            }
-            else
+            if (_sessionCount ==  _sessions.Length) 
             {
-                throw new ArgumentException("Invalid session type. Must be Lecture or PracticalLesson.");
+                Array.Resize(ref _sessions, _sessions.Length + 1);
             }
+            _sessions[_sessionCount++] = session;
         }
 
         public bool IsPractical()
@@ -43,7 +46,10 @@
             var clone = new Training(this.Description);
             foreach (var session in _sessions)
             {
-                clone.AddSession(session.Clone());
+                if (session != null)
+                {
+                    clone.AddSession(session.Clone());
+                }
             }
             return clone;
         }
