@@ -13,13 +13,13 @@ public static class Program
         matrix[1, 1] = 20;
         matrix[2, 2] = 30;
 
-        Console.WriteLine("Original values:");
-        matrix.DisplayMatrix();
+        Console.WriteLine($"Original values:\n {matrix.ToString()}");
+        
 
         // Undo the last change
         tracker.Undo();
-        Console.WriteLine("\nAfter undo:");
-        matrix.DisplayMatrix();
+        Console.WriteLine($"\nAfter undo:\n {matrix.ToString()}");
+        
 
         // Create another diagonal matrix and add it to the first
         var matrix2 = new DiagonalMatrix<int>(5);
@@ -30,10 +30,10 @@ public static class Program
         var resultMatrix = matrix.Add(matrix2, (a, b) => a + b);
 
 
-        Console.WriteLine("\nmatrix2:");
-        matrix2.DisplayMatrix();
+        Console.WriteLine($"\nmatrix2:\n {matrix2.ToString()}");
+        
 
-        Console.WriteLine("\nResult of matrix addition:");
-        resultMatrix.DisplayMatrix();
+        Console.WriteLine($"\nResult of matrix addition:\n {resultMatrix.ToString()}");
+      
     }
 }

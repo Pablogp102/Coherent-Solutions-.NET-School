@@ -1,4 +1,6 @@
-﻿namespace Task_4._1.Matrix
+﻿using System.Text;
+
+namespace Task_4._1.Matrix
 {
     public class DiagonalMatrix<T>
     {
@@ -8,8 +10,11 @@
 
         public DiagonalMatrix(int size)
         {
-            if (size < 0) throw new ArgumentException("Size must be non-negative value.");
-            Size = size;
+            if (size < 0)
+            {
+                throw new ArgumentException("Size must be non-negative value.");
+            }
+                Size = size;
             diagonalElements = new T[size];
         }
         public T this[int i, int j]
@@ -39,35 +44,27 @@
             }
         }
 
-        public void DisplayMatrix()
+        public override string ToString()
         {
+            var sb = new StringBuilder();
+
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
                 {
                     if (i == j)
-                        Console.Write($"{diagonalElements[i]}\t");
+                    {
+                        sb.Append($"{diagonalElements[i]}\t");
+                    }
                     else
-                        Console.Write($"{default(T)}\t");
+                    {
+                        sb.Append($"{default(T)}\t");
+                    }
                 }
-                Console.WriteLine();
+                sb.AppendLine();
             }
-        }
-    }
 
-    public class ElementChangedEventArgs<T> : EventArgs
-    {
-        public int Row { get; }
-        public int Column { get; }
-        public T OldValue {  get; }
-        public T NewValue {  get; }
-
-        public ElementChangedEventArgs(int row, int colum, T oldValue, T newValue)
-        {
-            Row = row;
-            Column = colum;
-            OldValue = oldValue;
-            NewValue = newValue;
+            return sb.ToString();
         }
     }
 }
